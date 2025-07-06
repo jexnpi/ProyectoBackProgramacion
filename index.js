@@ -2,211 +2,74 @@
 //IMPORTACIONES//
 import express from "express";
 import environments from "./src/api/config/environments.js";
-import connection from "./src/api/database/db.js";
 import cors from "cors";
+import { productRoutes, viewRoutes } from "./src/api/routes/index.js"; // Importamos las rutas de productos y vistas
+import { loggerUrl } from "./src/api/middlewares/middlewares.js";
+import {join, __dirname} from "./src/api/utils/index.js"
 
 const PORT = environments.port;
 const app = express();
 
-//////////////
-//MIDDLEWARES//
-//Pueden ser middleware de aplicacion, de ruta
-//Funciones que se ejecutan entre la peticion y entre la respuesta
-//Middlewares de aplicacion aplicados a nivel de 
+//Configuramos el EJS como motor de plantillas
+app.set("view engine" , "ejs");
 
+//Definimos la ruta donde estan almacenadas las plantillass .ejs, con join combinamos el directorio raiz del proyecto con src/views
+app.set("views", join(__dirname, "src/views"));
+
+//Configuramos expresss para que sirva acrchivos estaticos desde la carpeta public/, archivos como style.sccc ,logo.png seran accesibles via HTTP
+app.use(express.static(join(__dirname,"src/public")));
+
+
+//////////////MIDDLEWARES/////////////////////////
+//Funciones que se ejecutan entre la peticion y entre la respuesta
+//app.use se usa para crear middlewares
+//Middlewares de aplicacion -> Aplicados a nivel de aplicacion para todas las solicitudes
+//Middleware de ruta -> Aplicados a rutas especificas y ejecutadas solo cuando una solicitud coincide con la ruta definida
 app.use(express.json()); //Parseamos JSON en las solicitudes POST y PUT
 app.use(cors()); //Middleware CORS basico que permite todas las solicitudes
+app.use(loggerUrl); //Middleware Logger para analizar y registrar las solicitudes
 
-// Middleware Logger para analizar y registrar las solicitudes
-app.use((req, res, next) => {
+//BORRAR
+/* app.use((req, res, next) => {
     console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);
     next();
-});
+}); */
 
 
-//Middleware de ruta Aplicados a rutas especificas y ejecutadas solo cuando una solicitud coincide con la ruta definida
-const validateId = (req,res,next) => {
-    const id = req.params.id; //o tambien mas optimo const {id} = req.params;
-
-    if(!id || isNaN(id)) {
-        return res.status(400).json({
-            error: "El ID debe ser un numero"
-        });
-    }
-    // Convertimos el parametro id (originalmente un string porque viene de la url) en un enttero decimal
-    req.id = parseInt(id, 10); 
-
-    next();
-}
-
-////RUTAS////
+//////////////RUTAS////////////////////////////////
 app.get("/", (req, res) => {
     res.send("Hola mundo");
 });
+
+/////////////VIEWS/VISTAS/////////////////
+app.use("/dashboard", viewRoutes); //rutas vistas
+
+app.use("/api/products",productRoutes); //Rutas productos
 
 //CRUD -> Create (POST)  - Read (GET) - Update (PUT) - Delete (DELETE)
 
 //GET
 // 1. Primer endpoint GET -> Traer todos los productos
-app.get("/products", async(req,res) => {
-    //1 optimizacion, manejo de errores con try/catch
-    try{
-        let sql = `SELECT * FROM products`; //se crea la sentencia sql
-        
-        //Al usar [rows] la desestructuracion extrae directamente las filas (que es el primer elemento del resultado de la consulta), nos sirve porque hace el codigo mas legible y explicito
-        const [rows] = await connection.query(sql);
-    
-        // 2 optimizacion, responder con exito aunque este vacio
-        // Aca devolvemos el texto plano JSON con toda la informacion de los productos
-        res.status(200).json({
-            payload: rows,
-            message: rows.length === 0 ?  "No se encontraron usuarios" : "Usuarios encontrados"
-        });
-    }catch (error) {
-        console.error("Error obteniendo productos", error);
-        res.status(500).json({
-            error: "Error interno del servidor al obtener productos"
-        })
-    }
-})
+
 
 //GET
 //2 Segundo endpoint GET by id -> traer producto por su id
-//Se recicla para hacer el put y el get
-app.get("/products/:id", validateId, async(req, res) =>{
-    try{
-    //let id = req.params.id
-    let {id} = req.params;
+//Este endpoint responde a solicitudes GET para obtener un producto específico por su ID
+//app.get(...): Define una ruta HTTP GET para /products/:id.
+//validateId: Es un middleware que valida que el id tenga un formato correcto (por ejemplo, que sea un número).
 
-    //Consulta no optima porque permite la inyeccion SQL
-    //let sql = `SELECT * FROM products where id = ${id}`;
-    let sql =`SELECT * FROM products where id = ?`;
-
-    let [rows] = await connection.query(sql,[id]);
-
-    //Verificamos si se encontro el producto
-    if (rows.lenght === 0){
-        return res.status(404).json({
-            error:`No se encontro el producto con id: ${id}`
-        })
-    }
-
-    res.status(200).json({
-        payload: rows
-    });
-
-    } catch (error) {
-        console.error(`Error obteniendo producto con id ${id}`, error.message);
-
-        res.status(500).json({
-            error: "Error interno al obtener un producto por id"
-        })  
-    }
-})
 
 //POST
 // 3. Tercer endpoint POST -> Crear nuevos productos
-app.post("/products", async (req,res) =>{
-    try{
-        let{categoria,imagen,nombre,precio} = req.body;
-    
-        if(!categoria || !imagen || !nombre || !precio){
-            return res.status(400).json({
-                message: "Datos invalidos, asegurate de enviar categoria, imagen, nommbre y precio"
-            });
-        }
 
-        //Hacemos uso de placeholders ? para prevenir ataques de SQL Injection
-        let sql = `INSERT INTO products (categoria, imagen, nombre, precio) VALUES (?,?,?,?)`;
-        let [rows] = await connection.query (sql,[categoria,imagen,nombre,precio]);
-
-        res.status(201).json({
-            message:"Producto creado con exito",
-            productId: rows.insertId //con productId devolvemos info util del insert para devolver el ID del producto creado
-        })
-    
-    }catch(error){
-        console.error(error);
-
-        res.status(500).json({
-            message:"Error interno del servidor",
-            error: error.message
-        })
-    }
-});
 
 //UPDATE
 // 4. Cuarto endpoint -> Update
-app.put("/product",async (req,res)=>{
-    try{
-        let{categoria,imagen,nombre,precio} = req.body;
-    
-        if(!categoria || !imagen || !nombre || !precio){
-            return res.status(400).json({
-                message: "Faltan campos requeridos"
-            });
-        }
-        let sql = `
-        UPDATE products
-        SET nombre = ?, imagen= ?, precio = ?, categoria = ?
-        WHERE id = ?`;
 
-        let [result] = await connection.query(sql,[nombre, imagen, precio, categoria, id]); //guardamos la sentencia del sql
-        
-         // Testeamos que se actualizara
-        if(result.affectedRows ===0){
-            return res.status(400).json({
-                message:"No se actualizo el producto"
-            })
-        }
-        res.status(200).json({
-            message:"Producto actualizado correctamente"
-        });
-    
-    }catch (error){
-        console.log("Error al actualizar el producto");
-
-        res.status(500).json({
-            message:"Error interno del servidor",
-            error: error.message
-        })
-
-    }})
 
 //DELETE
 // 4. Cuarto endpoint -> Delete 
-app.delete("/products/:id",async(req,res) =>{
-    try{
-        let{id} = req.params;
-        if (!id) {
-            return res.status(400).json({
-                message:"Se requiere un id para eliminar un producto"
-            })
-        }
-        let sql ="DELETE FROM products WHERE id = ?";
 
-        let [result] = await connection.query (sql, [id]);
-
-        //Verficamos que se eliminara
-        if(result.affectedRows === 0){
-            return res.status(400).json({
-                message : `No se encontro un producto con id ${id}`
-            });
-        }
-
-        return res.status(200).json({
-            message: `Producto con id ${id} eliminado correctamente`
-        });
-
-    } catch (error) {
-        console.error("Error en DELETE /products/:id", error);
-
-        res.status(500).json({
-            message: `Error al eliminar producto con id ${id}`, error,
-            error: error.message
-        })
-    }
-})
 
 
 app.listen(PORT,() => {
@@ -214,8 +77,57 @@ app.listen(PORT,() => {
 })
 
 
+//REQUEST (req), hace las solicitudes
+/* Conformado por:
+Metodo: Indica que tipo de request es (si es un post, get, delete)
+URL: Url con la que se quiere comunicar
+Header: Dice que se devuelve
+Body: Campo opcional, para incluir datos*/
 
+/* METODOS DE REQUEST
+GET: 
+POST:
+PUT:
+DELETE:  */
 
+//RESPONSE (res), atienden a las solicitudes del cliente
+/* Conformado por:
+Status code: Codigos que dicen si se pudo realizar la request
+1XX: INFORMACION
+100: continue
+101: Switching protocols
+103: early hints
+
+2XX: EXITOSO
+200: ok
+201: creado
+202: accepted
+203: non-Authoritative Information
+204: no content
+205: reset content
+206: Partial content
+
+3XX: REDIRECCION
+300: Multiple Choices
+301: Moved Permanently
+302: Found
+303: See Other
+304: Not Modified
+307: Temporary Redirect
+308: Permanent Redirect
+
+4XX: ERROR DEL CLIENTE
+400: Bad Request
+404: Not Found
+
+5XX: ERROR DEL SERVER
+500: Internal Server Error
+502: Bad Gateway
+
+El header: Dice que se devuelve
+Body: opcional, para incluir datos*/
+
+//Hay que hacer un fetch para la base
 
 //PARA CORRER EL PUERTO npm run dev
 //DESCARGAR CORS npm i cors
