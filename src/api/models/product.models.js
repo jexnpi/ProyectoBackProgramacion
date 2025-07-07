@@ -25,7 +25,7 @@ const insertNewProduct = async(categoria, imagen, nombre, precio) =>{
 }
 
 // Actualizar producto //
-const updateProduct = async(nombre,imagen, precio, categoria, id) =>{
+const updateProduct = async(nombre, imagen, precio, categoria, id) =>{
     let sql = `
         UPDATE products
         SET nombre = ?, imagen= ?, precio = ?, categoria = ?
