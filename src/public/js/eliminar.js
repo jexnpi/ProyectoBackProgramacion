@@ -67,8 +67,8 @@ function mostrarProducto(producto) {
     let htmlProductos = `
     <li class="li-listados productos-listados">
         <div class="li-listados_datos">
-            <p>Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: $${producto.price}</strong></p>
-            <img src="${producto.image}" alt="${producto.nombre}" class="img-listados">
+            <p>Id: ${producto.id} / Nombre: ${producto.nombre} / <strong>Precio: $${producto.precio}</strong></p>
+            <img src="${producto.imagen}" alt="${producto.nombre}" class="img-listados">
         </div>
         <div class="li-listados_boton">
             <input class="listados_boton" id="deleteProduct_button" type="button" value="Eliminar producto">
