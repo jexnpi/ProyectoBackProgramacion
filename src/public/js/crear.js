@@ -14,7 +14,7 @@ altaProducts_form.addEventListener("submit", async (event) => {
     console.log(data);
     console.table(data);
 
-    if(!data.name || !data.image || !data.price) {
+    if(!data.nombre || !data.imagen || !data.precio) {
         alert("Todos los campos son obligatorios");
         return;
     }

@@ -268,3 +268,167 @@
     </div>
 </main> */
 
+/* CRUD FORMS (crear, consultar, eliminar, modificar) */
+.crudForm-container {
+  margin: 40px auto;
+  padding: 30px;
+  max-width: 500px;
+  background-color: rgba(30, 12, 46, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.2);
+  text-align: left;
+}
+
+.crudForm-container h2 {
+  font-family: "Press Start 2P", system-ui;
+  font-size: 16px;
+  color: #00ffccc9;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.3);
+}
+
+.crudForm-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #00ffccc9;
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
+}
+
+.crudForm-container input,
+.crudForm-container select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 2px solid #00ffcc63;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+}
+
+.crudForm-container input[type="submit"] {
+  cursor: pointer;
+  background-color: #00ffcca2;
+  color: rgba(44, 9, 75, 0.945);
+  font-weight: bold;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.crudForm-container input[type="submit"]:hover {
+  background-color: #eeeeee;
+  color: #000000d7;
+}
+
+/* Listado dentro del consultar/eliminar */
+#productos-lista, #getId-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.li-listados {
+  background-color: #241531;
+  border: 1px solid #00ffcc86;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+  font-family: "Orbitron", sans-serif;
+  color: #00ffccc9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.li-listados img {
+  width: 100px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* RESPONSIVE para CRUD */
+@media (max-width: 768px) {
+  .crudForm-container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .crudForm-container h2 {
+    font-size: 14px;
+  }
+
+  .crudForm-container label,
+  .crudForm-container input,
+  .crudForm-container select {
+    font-size: 12px;
+  }
+}
+
+.seccion-productos {
+  padding: 20px;
+}
+
+.card-producto {
+  border: 1px solid #00ffccc9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img-listados {
+  width: 100px;
+  border-radius: 5px;
+  height: 120px;
+}
+
+.card-producto h3 {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #00ffcc;
+  font-family: "Orbitron", sans-serif;
+}
+
+.card-producto p {
+  font-size: 1rem;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 500;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.card-producto button:hover {
+  background-color: #218838;
+}
+
+.contenedor-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card-producto {
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #241531;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-producto button {
+  cursor: pointer;
+  padding: 6px 12px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+

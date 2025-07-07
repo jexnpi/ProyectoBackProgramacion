@@ -35,8 +35,8 @@ const url = "http://localhost:3000/api";
 
             let htmlProductos = `
             <li class="li-listados productos-listados">
-                <img src="${producto.image}" alt="${producto.nombre}" class="img-listados">
-                <p>Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: $${producto.price}</strong></p>
+                <img src="${producto.imagen}" alt="${producto.nombre}" class="img-listados">
+                <p>Id: ${producto.id} / Nombre: ${producto.nombre} / <strong>Precio: $${producto.precio}</strong></p>
             </li>
             `;
 

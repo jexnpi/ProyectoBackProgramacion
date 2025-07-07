@@ -105,7 +105,7 @@ export const createProduct = async (req,res) =>{
 // 4. Cuarto endpoint -> Update
 export const modifyProduct = async (req,res)=>{
     try{
-        let{categoria,imagen,nombre,precio} = req.body;
+        let{categoria,imagen,nombre,precio,id} = req.body;
     
         if(!categoria || !imagen || !nombre || !precio){
             return res.status(400).json({

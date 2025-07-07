@@ -67,8 +67,8 @@ function mostrarProducto(producto) {
     let htmlProductos = `
     <li class="li-listados productos-listados">
         <div class="li-listados_datos">
-            <p>Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: $${producto.price}</strong></p>
-            <img src="${producto.image}" alt="${producto.nombre}" class="img-listados">
+            <p>Id: ${producto.id} / Nombre: ${producto.nombre} / <strong>Precio: $${producto.precio}</strong></p>
+            <img src="${producto.imagen}" alt="${producto.nombre}" class="img-listados">
         </div>
         <div class="li-listados_boton">
             <input class="listados_boton" id="updateProduct_button" type="button" value="Actualizar producto">
@@ -101,19 +101,19 @@ function formularioPutProducto(event, producto) {
                 <input type="number" name="id" id="idProd" value=${producto.id} readonly>
             
                 <label for="categoryProd">Categoria</label>
-                <select name="category" id="categoryProd" required>
-                    <option value="food">food</option>
-                    <option value="drink">drink</option>
+                <select name="categoria" id="categoryProd" required>
+                    <option value="consolas">consolas</option>
+                    <option value="juegos">juegos</option>
                 </select>
 
                 <label for="imagenProd">Imagen</label>
-                <input type="text" name="image" id="imagenProd" value="${producto.image}" required>
+                <input type="text" name="imagen" id="imagenProd" value="${producto.imagen}" required>
 
                 <label for="nombreProd">Nombre</label>
-                <input type="text" name="name" id="nombreProd" value="${producto.name}" required>
+                <input type="text" name="nombre" id="nombreProd" value="${producto.nombre}" required>
 
                 <label for="precioProd">Precio</label>
-                <input type="number" name="price" id="precioProd" value="${producto.price}" required>
+                <input type="number" name="precio" id="precioProd" value="${producto.precio}" required>
 
                 <input type="submit" value="Actualizar producto">
             </form>
@@ -138,7 +138,7 @@ async function actualizarProducto(event) {
 
     let data = Object.fromEntries(formData.entries());
 
-    if(!data.name || !data.image || !data.price) {
+    if(!data.nombre || !data.imagen || !data.precio) {
         alert("Todos los campos son obligatorios");
         return;
     }
