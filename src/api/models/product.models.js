@@ -25,18 +25,19 @@ const insertNewProduct = async(categoria, imagen, nombre, precio) =>{
 }
 
 // Actualizar producto //
-const updateProduct = async(nombre, imagen, precio, categoria, id) =>{
+const updateProduct = async(nombre, imagen, precio, categoria, activo, id) =>{
     let sql = `
         UPDATE products
-        SET nombre = ?, imagen= ?, precio = ?, categoria = ?
+        SET nombre = ?, imagen= ?, precio = ?, categoria = ?, activo = ?
         WHERE id = ?`;
 
-    return await connection.query(sql,[nombre, imagen, precio, categoria, id]); //guardamos la sentencia del sql      
+    return await connection.query(sql,[nombre, imagen, precio, categoria, activo, id]); //guardamos la sentencia del sql      
 }
 
 // Eliminar producto //
 const deleteProduct = async(id) =>{
-    let sql ="DELETE FROM products WHERE id = ?";
+    /* let sql ="DELETE FROM products WHERE id = ?"; */
+    let sql = "UPDATE products SET activo = 0 WHERE id = ?"; /* MODIFICADO ACA */
 
     return await connection.query (sql, [id]);
 }

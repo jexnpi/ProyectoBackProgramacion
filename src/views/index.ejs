@@ -1,9 +1,7 @@
 <%- include("partials/head") %>
 <%- include("partials/nav") %>
     
-<hr>
 <h1 class="titulo"><%= title %></h1>
-<hr>
 
 <main id="contenedor-get">
     <div id="productos-container">
@@ -12,12 +10,12 @@
             
                 <li class="li-listados productos-listados">
                     <img src="<%= prod.imagen %>" alt="Imagen <%= prod.nombre %>" class="img-listados">
-                    <p>Id: <%= prod.id %> / Nombre: <%= prod.nombre %>/ <strong>Precio: <%= prod.precio %></strong></p>
+                    <p>Id: <%= prod.id %> / Nombre: <%= prod.nombre %>/ <strong>Precio: <%= prod.precio %> / Estado: <%= prod.activo %></strong></p>
                 </li>
             <!--
             <li class="li-listados productos-listados">
                 <img src="" alt="" class="img-listados">
-                <p>Id: / Nombre: / <strong>Precio: </strong></p>
+                <p>Id: / Nombre: / <strong>Precio: </strong> / Estado:</p>
             </li>
             -->
             <% }) %>

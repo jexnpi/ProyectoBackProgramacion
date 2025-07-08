@@ -105,7 +105,7 @@ export const createProduct = async (req,res) =>{
 // 4. Cuarto endpoint -> Update
 export const modifyProduct = async (req,res)=>{
     try{
-        let{categoria,imagen,nombre,precio,id} = req.body;
+        let{categoria,imagen,nombre,precio, activo, id} = req.body;
     
         if(!categoria || !imagen || !nombre || !precio){
             return res.status(400).json({
@@ -119,7 +119,7 @@ export const modifyProduct = async (req,res)=>{
 
         let [result] = await connection.query(sql,[nombre, imagen, precio, categoria, id]); //guardamos la sentencia del sql
          */
-        const [result] = await Products.updateProduct(nombre, imagen, precio, categoria, id); //guardamos la sentencia del sql
+        const [result] = await Products.updateProduct(nombre, imagen, precio, categoria, activo, id); //guardamos la sentencia del sql
 
          // Testeamos que se actualizara
         if(result.affectedRows ===0){

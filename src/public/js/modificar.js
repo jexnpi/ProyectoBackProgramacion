@@ -115,6 +115,12 @@ function formularioPutProducto(event, producto) {
                 <label for="precioProd">Precio</label>
                 <input type="number" name="precio" id="precioProd" value="${producto.precio}" required>
 
+                <label for="estadoProd">Estado</label>
+                <select name="activo" id="estadoProd" required> 
+                    <option value="1" ${producto.activo == 1 ? 'selected' : ''}>Activo</option>
+                    <option value="0" ${producto.activo == 0 ? 'selected' : ''}>Inactivo</option>
+                </select>
+
                 <input type="submit" value="Actualizar producto">
             </form>
         </div>
