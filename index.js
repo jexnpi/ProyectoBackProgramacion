@@ -7,6 +7,7 @@ import { productRoutes, viewRoutes } from "./src/api/routes/index.js"; // Import
 import { loggerUrl } from "./src/api/middlewares/middlewares.js";
 import {join, __dirname} from "./src/api/utils/index.js"
 
+
 const PORT = environments.port;
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(join(__dirname,"src/public")));
 app.use(express.json()); //Parseamos JSON en las solicitudes POST y PUT
 app.use(cors()); //Middleware CORS basico que permite todas las solicitudes
 app.use(loggerUrl); //Middleware Logger para analizar y registrar las solicitudes
+
 
 //BORRAR
 /* app.use((req, res, next) => {
@@ -69,6 +71,7 @@ app.use("/api/products",productRoutes); //Rutas productos
 
 //DELETE
 // 4. Cuarto endpoint -> Delete 
+
 
 
 
