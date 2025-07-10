@@ -1,5 +1,4 @@
-//se encarga de gestionar a que ruta llama el controlador
-//Importamos express.Router
+//view.routes.js se encarga de gestionar a que ruta llama el controlador
 import {Router} from "express";
 import { vistaListado, vistaConsultarId, vistaCrear,vistaModificar,vistaEliminar } from "../controllers/view.controllers.js";
 

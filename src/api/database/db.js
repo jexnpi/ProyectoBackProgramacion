@@ -1,6 +1,6 @@
-import mysql from "mysql2/promise"; //importamos el modulo mysql2 en modo promesa para usar async/await en la conexio a la base de datos mysql
+import mysql from "mysql2/promise"; //importamos el modulo mysql2 en modo promesa para usar async/await en la conexion a la base de datos mysql
 
-//TRAEMOS LOS datos de conexion de nuestro archivo de variables de entorno
+//Traemos/importamos los datos de conexion/ configuracion que hicimos en environments.js
 import environments from "../config/environments.js";
 const {database} = environments;
 

@@ -1,83 +1,54 @@
 /* ESTILOS GLOBALES */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   }
   
   /* CUERPO */
-  body {
-    background-color:#010303f3;
-    transition: all 0.3s ease;
+body {
+  background-color:#010303f3;
+  transition: all 0.3s ease;
   }
-  
-  /* TEMA CLARO */
-  .tema-claro {
-    background-color: rgba(131, 204, 204, 0.651);
-    color: black;
-  }
-  .tema-claro main{
-      background-color: rgb(119, 23, 197);
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.815);
-  }
-  
-  #boton-tema{
-    background-color: #000000d7;
-    margin-top: 100px;
-    margin-left: 20px;
-    color: #00ffccb4;
-    padding: 5px 5px;
-    font-family: "Orbitron", sans-serif;
-    font-size: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  #boton-tema:hover {
-    background-color: #00ffccb4;
-    color:#000000d7;
-  }
-  
   
   /* HEADER */
   /* IGUAL EN TODAS LAS PAGINAS */
-  header {
-    text-align: center;
-    padding: 30px;
-    background-color: #241531;
-    width: 100%;
+header {
+  text-align: center;
+  padding: 30px;
+  background-color: #241531;
+  width: 100%;
   }
   
-  .logo{
-    width: 80px;
-    height: 80px; 
-    border-radius: 50px;
+.logo{
+  width: 80px;
+  height: 80px; 
+  border-radius: 50px;
   }
   
-  .nombre-pagina{
-    padding-top: 5px;
-    font-family: "Press Start 2P", system-ui;
-    font-weight: 400;
-    font-size: 25px;
-    color: #00ffcc;
-    margin: 10px 0;
-    text-shadow: 0 0 12px rgba(0, 255, 204, 0.678);
+.nombre-pagina{
+  padding-top: 5px;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-size: 25px;
+  color: #00ffcc;
+  margin: 10px 0;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.678);
   }
   
 .nombre-alumno{
-    font-size: 7px;
-    font-family: "Orbitron", sans-serif;
-    color: rgba(250, 235, 215, 0.685);
-    padding-top: 10px;
+  font-size: 7px;
+  font-family: "Orbitron", sans-serif;
+  color: rgba(250, 235, 215, 0.685);
+  padding-top: 10px;
   }
 
 .listado-nav{
-    padding-top: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center;
+  padding-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
 }
 
 .listado-nav li{
@@ -93,46 +64,25 @@
 /* FIN HEADER */
 
 
-/* PAGINA CONSULTAR */
+/* CRUD FORMS (crear, consultar, eliminar, modificar) */
 .titulo {
-    text-align: center;
-    margin-top: 30px;
-    font-family: "Press Start 2P", system-ui;
-    font-weight: 400;
-    color: #00ffccc9;
-    text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
-    font-size: 25px;
+  text-align: center;
+  margin-top: 30px;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
+  font-size: 25px;
   }
   
-
   /* Contenedor general */
-  #contenedor-get {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 40px auto;
-    padding: 20px;
+#contenedor-get {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px auto;
+  padding: 20px;
 }
-
-/* .crudForm-container h2{
-    font-family: "Orbitron", sans-serif;
-    color: #fafafad0;
-    text-align: center;
-    font-weight: 400;
-    font-size: 25px;
-    margin-bottom: 15px;
-} */
-
-/* #getProduct-form label, input{
-    display: block;
-    margin-bottom: 10px;
-}
-
-#getProduct-form label{
-    font-size: 12px;
-    font-family: "Orbitron", sans-serif;
-    color: #fafafad0;
-} */
 
 #idProd {
   padding: 2px;
@@ -144,7 +94,6 @@
   margin-bottom: 10px;
 }
 
-/* FALTA VER EL BOTON */
 
 /* CRUD FORMS (crear, consultar, eliminar, modificar) */
 .crudForm-container {
@@ -155,7 +104,6 @@
   border: 1px solid rgba(0, 255, 204, 0.2);
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0, 255, 204, 0.2);
-  /* text-align: left; */
 }
 
 .crudForm-container h2 {
@@ -239,13 +187,6 @@
   border: none;
   transition: background-color 0.3s ease;
 }
-
-/* .listados_boton input :hover{
-  background-color: #eeeeee;
-  color: #000000d7;
-} */
-
-
 
 
 /* RESPONSIVE para CRUD */
