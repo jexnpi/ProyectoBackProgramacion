@@ -17,15 +17,13 @@ app.set("view engine" , "ejs");
 //Definimos la ruta donde estan almacenadas las plantillass .ejs, con join combinamos el directorio raiz del proyecto con src/views
 app.set("views", join(__dirname, "src/views"));
 
-//Configuramos expresss para que sirva acrchivos estaticos desde la carpeta public/, archivos como style.sccc ,logo.png seran accesibles via HTTP
+//Configuramos express para que sirvan los archivos estaticos desde la carpeta public/, archivos como style.ccs ,logo.png seran accesibles via HTTP
 app.use(express.static(join(__dirname,"src/public")));
 
 
 //////////////MIDDLEWARES/////////////////////////
 //Funciones que se ejecutan entre la peticion y entre la respuesta
 //app.use se usa para crear middlewares
-//Middlewares de aplicacion -> Aplicados a nivel de aplicacion para todas las solicitudes
-//Middleware de ruta -> Aplicados a rutas especificas y ejecutadas solo cuando una solicitud coincide con la ruta definida
 app.use(express.json()); //Parseamos JSON en las solicitudes POST y PUT
 app.use(cors()); //Middleware CORS basico que permite todas las solicitudes
 app.use(loggerUrl); //Middleware Logger para analizar y registrar las solicitudes
@@ -44,7 +42,7 @@ app.get("/", (req, res) => {
 });
 
 /////////////VIEWS/VISTAS/////////////////
-app.use("/dashboard", viewRoutes); //rutas vistas
+app.use("/dashboard", viewRoutes); //Rutas vistas
 
 app.use("/api/products",productRoutes); //Rutas productos
 
@@ -74,63 +72,9 @@ app.use("/api/products",productRoutes); //Rutas productos
 
 
 
-
 app.listen(PORT,() => {
     console.log(`Servidor corriendo en el puerto ${PORT}`)
 })
-
-
-//REQUEST (req), hace las solicitudes
-/* Conformado por:
-Metodo: Indica que tipo de request es (si es un post, get, delete)
-URL: Url con la que se quiere comunicar
-Header: Dice que se devuelve
-Body: Campo opcional, para incluir datos*/
-
-/* METODOS DE REQUEST
-GET: 
-POST:
-PUT:
-DELETE:  */
-
-//RESPONSE (res), atienden a las solicitudes del cliente
-/* Conformado por:
-Status code: Codigos que dicen si se pudo realizar la request
-1XX: INFORMACION
-100: continue
-101: Switching protocols
-103: early hints
-
-2XX: EXITOSO
-200: ok
-201: creado
-202: accepted
-203: non-Authoritative Information
-204: no content
-205: reset content
-206: Partial content
-
-3XX: REDIRECCION
-300: Multiple Choices
-301: Moved Permanently
-302: Found
-303: See Other
-304: Not Modified
-307: Temporary Redirect
-308: Permanent Redirect
-
-4XX: ERROR DEL CLIENTE
-400: Bad Request
-404: Not Found
-
-5XX: ERROR DEL SERVER
-500: Internal Server Error
-502: Bad Gateway
-
-El header: Dice que se devuelve
-Body: opcional, para incluir datos*/
-
-//Hay que hacer un fetch para la base
 
 //PARA CORRER EL PUERTO npm run dev
 //DESCARGAR CORS npm i cors

@@ -4,7 +4,7 @@ export const vistaListado = async(req,res) =>{
     try{
         const respuestaProductos = await Products.selectAllProducts();
 
-        //.render apunta a la plantilla, renderiza la plantilla
+        //res.render() es un método de Express que se usa para renderizar (mostrar) una plantilla de vista y enviar el HTML resultante al navegador.
         res.render("index", {
             title: "Listado de productos",
             products: respuestaProductos[0]

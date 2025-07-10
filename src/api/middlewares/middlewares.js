@@ -1,5 +1,6 @@
-// Middleware Logger para analizar y registrar las solicitudes
+//Contiene funciones intermedias que se ejecutan antes de llegar al controlador, sirven para autenticar, validar y demas 
 
+// Middleware Logger para analizar y registrar las solicitudes
 const loggerUrl = (req, res, next) => {
     console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);
     next();
@@ -15,7 +16,7 @@ const validateId = (req,res,next) => {
             error: "El ID debe ser un numero"
         });
     }
-    // Convertimos el parametro id (originalmente un string porque viene de la url) en un enttero decimal
+    // Convertimos el parametro id (originalmente un string porque viene de la url) en un entero decimal
     req.id = parseInt(id, 10); 
 
     next();

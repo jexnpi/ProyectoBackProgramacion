@@ -1,8 +1,8 @@
-//Logica para trabajar con archivos y rutas de protecto en express.js
+//Logica para trabajar con archivos y rutas de proyecto en express.js
 
 //Importacion de modulos para trabajar con rutas
 
-//Convierte una URL de acrchivo del sistema en una ruta valida del sistema operativo (home/usuario/proyecto)
+//Convierte una URL de archivo del sistema en una ruta valida del sistema operativo (home/usuario/proyecto)
 import {fileURLToPath} from "url";
 
 //dirname extrae el directorio padre de una ruta

@@ -1,6 +1,7 @@
 const url = "http://localhost:3000/api";
-    let getId_lista = document.getElementById("getId-list");
-    let getProduct_form = document.getElementById("getProduct-form");
+
+let getId_lista = document.getElementById("getId-list");
+let getProduct_form = document.getElementById("getProduct-form");
 
     getProduct_form.addEventListener("submit", async(event) => {
 
@@ -8,7 +9,7 @@ const url = "http://localhost:3000/api";
 
 
         try {
-            // Como obtenemos y almacenamos en JavaScript la informacion de un formulario?
+            // Como obtenemos y almacenamos en JavaScript la informacion de un formulario
             let formData = new FormData(event.target);
             console.log(formData);
 
@@ -16,19 +17,14 @@ const url = "http://localhost:3000/api";
             let data = Object.fromEntries(formData.entries());
             console.log(data); // idProd: "2"
 
-            // Ahora si, almacenamos el valor numerico del formulario para pasarselo a la peticion fetch
+            // Almacenamos el valor numerico del formulario para pasarselo a la peticion fetch
             let idProd = data.idProd;
-            console.log(idProd); // 2
-
+            console.log(idProd); 
 
             let response = await fetch(`${url}/products/${idProd}`);
 
             let datos = await response.json();
             console.log(datos);
-
-            /////////////////////////////////////////
-            // TODO, optimizar consulta!!!!!!!!!!!!!
-            ////////////////////////////////
 
             let producto = datos.payload[0]; // El primer resultado es el que contiene el producto que nos devolvio la consulta
             console.log(producto);
